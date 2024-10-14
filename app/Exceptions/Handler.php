@@ -2,33 +2,28 @@
 
 namespace App\Exceptions;
 
+use Ars\Responder\Facades\Responder;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
     /**
-     * A list of exception types with their corresponding custom log levels.
-     *
-     * @var array<class-string<\Throwable>, \Psr\Log\LogLevel::*>
+     * Define custom log levels.
      */
-    protected $levels = [
-        //
-    ];
+    protected $levels = [];
 
     /**
-     * A list of the exception types that are not reported.
-     *
-     * @var array<int, class-string<\Throwable>>
+     * Exception types that are not reported.
      */
-    protected $dontReport = [
-        //
-    ];
+    protected $dontReport = [];
 
     /**
-     * A list of the inputs that are never flashed to the session on validation exceptions.
-     *
-     * @var array<int, string>
+     * Inputs that are never flashed to the session on validation exceptions.
      */
     protected $dontFlash = [
         'current_password',
@@ -42,7 +37,35 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            //
+
+        });
+
+        $this->renderable(function (AuthenticationException $e, $request) {
+            if ($request->expectsJson()) {
+                return Responder::unAuthenticated();
+            }
+        });
+
+        $this->renderable(function (TooManyRequestsHttpException $e, $request) {
+            if ($request->expectsJson()) {
+                return Responder::tooManyRequests();
+            }
+        });
+
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            if ($request->expectsJson()) {
+                return Responder::notFound();
+            }
+        });
+
+        $this->renderable(function (HttpException $e, $request) {
+            if ($request->expectsJson()) {
+                if ($e->getStatusCode() == 403) {
+                    return Responder::unAuthorized();
+                } elseif ($e->getStatusCode() == 401) {
+                    return Responder::unAuthenticated();
+                }
+            }
         });
     }
 }

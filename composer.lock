@@ -4,8 +4,74 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bfe12996eeecb6fdc8713a9fd9d431f8",
+    "content-hash": "0263d4c36733f0d2fed340c8bb4d51cf",
     "packages": [
+        {
+            "name": "ars/api-responder-laravel",
+            "version": "v1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alireza2000sajedi/api-responder-laravel.git",
+                "reference": "a6aa08ebb4248cb322fc4178868c6fd27ecda7ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alireza2000sajedi/api-responder-laravel/zipball/a6aa08ebb4248cb322fc4178868c6fd27ecda7ac",
+                "reference": "a6aa08ebb4248cb322fc4178868c6fd27ecda7ac",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ars\\Responder\\ResponderServiceProvider"
+                    ],
+                    "aliases": {
+                        "Responder": "Ars\\Responder\\Facades\\Responder"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ars\\Responder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alireza Sajedi",
+                    "email": "alireza2000sajedi@gmail.com",
+                    "homepage": "https://github.com/alireza2000sajedi",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A library to simplify the creation of standardized API responses.",
+            "homepage": "https://github.com/alireza2000sajedi/api-responder-laravel",
+            "keywords": [
+                "Laravel Responder",
+                "api",
+                "api responder",
+                "http",
+                "json",
+                "laravel",
+                "php",
+                "responder",
+                "response",
+                "rest",
+                "standardized"
+            ],
+            "support": {
+                "issues": "https://github.com/alireza2000sajedi/api-responder-laravel/issues",
+                "source": "https://github.com/alireza2000sajedi/api-responder-laravel/tree/v1.0.7"
+            },
+            "time": "2024-09-28T09:54:25+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.12.1",

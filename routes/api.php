@@ -20,4 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 /* Public Routes */
-Route::apiResource('kyc', \App\Http\Controllers\KycController::class)->only(['show', 'store']);
+Route::middleware('whitelist')->group(function () {
+    Route::apiResource('kyc', \App\Http\Controllers\KycController::class)->only(['show', 'store']);
+});

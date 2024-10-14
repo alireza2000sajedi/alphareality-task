@@ -13,6 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('images/{imagePath}', [\App\Http\Controllers\FileStorageController::class, 'image'])
+    ->where('imagePath', '.*')->name('image');
